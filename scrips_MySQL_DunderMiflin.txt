@@ -1,0 +1,79 @@
+-- Creamos la base de datos con el nombre de la empresa
+CREATE DATABASE DunderMifflinERP;
+
+USE DunderMifflinERP;
+
+-- Creamos tabla Departamento
+CREATE TABLE Departamento (
+    id_departamento INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    ubicacion VARCHAR(100) NOT NULL,
+    presupuesto INT NOT NULL
+);
+
+
+-- Creamos otra tabla llamada Empleado
+CREATE TABLE Empleado (
+    id_empleado INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    apellido VARCHAR(100) NOT NULL,
+    telefono VARCHAR(20),
+    correo VARCHAR(150) UNIQUE,
+    id_departamento INT,
+    FOREIGN KEY (id_departamento) REFERENCES Departamento(id_departamento)
+);
+
+
+-- Insertamos los datos de la tabla Empleados 
+
+INSERT INTO Empleado (nombre, apellido, telefono, correo, id_departamento) VALUES 
+('Michael', 'Scott', '555-1234', 'michael.scott@dundermifflin.com', NULL),
+('Jim', 'Halpert', '555-2345', 'jim.halpert@dundermifflin.com', NULL),
+('Dwight', 'Schrute', '555-3456', 'dwight.schrute@dundermifflin.com', NULL),
+('Pam', 'Beesly', '555-4567', 'pam.beesly@dundermifflin.com', NULL),
+('Ryan', 'Howard', '555-5678', 'ryan.howard@dundermifflin.com', NULL),
+('Angela', 'Martin', '555-6789', 'angela.martin@dundermifflin.com', NULL),
+('Kevin', 'Malone', '555-7890', 'kevin.malone@dundermifflin.com', NULL),
+('Oscar', 'Martinez', '555-8901', 'oscar.martinez@dundermifflin.com', NULL),
+('Toby', 'Flenderson', '555-9012', 'toby.flenderson@dundermifflin.com', NULL),
+('Holly', 'Flax', '555-3456', 'holly.flax@dundermifflin.com', NULL),
+('Stanley', 'Hudson', '555-1111', 'stanley.hudson@dundermifflin.com', NULL),
+('Meredith', 'Palmer', '555-2222', 'meredith.palmer@dundermifflin.com', NULL),
+('Creed', 'Bratton', '555-3333', 'creed.bratton@dundermifflin.com', NULL),
+('Kelly', 'Kapoor', '555-4444', 'kelly.kapoor@dundermifflin.com', NULL),
+('Erin', 'Hannon', '555-5555', 'erin.hannon@dundermifflin.com', NULL),
+('Phyllis', 'Vance', '555-6666', 'phyllis.vance@dundermifflin.com', NULL),
+('Andy', 'Bernard', '555-7777', 'andy.bernard@dundermifflin.com', NULL),
+('Darryl', 'Philbin', '555-8888', 'darryl.philbin@dundermifflin.com', NULL),
+('Jan', 'Levinson', '555-5678', 'jan.levinson@dundermifflin.com', NULL),
+('David', 'Wallace', '555-9999', 'david.wallace@dundermifflin.com', NULL);
+
+
+-- Agregar columna id_jefe a Departamento
+
+ALTER TABLE Departamento ADD id_jefe INT;
+
+ALTER TABLE Departamento
+ADD CONSTRAINT FK_Departamento_Empleado_Jefe
+    FOREIGN KEY (id_jefe) REFERENCES Empleado(id_empleado);
+
+
+-- Insertamos los datos de la tabla Departamento
+
+INSERT INTO Departamento (nombre, ubicacion, presupuesto, id_jefe) VALUES 
+('Ventas', 'Scranton', 150000, 19),
+('Recepción', 'Scranton', 50000, 1),
+('Contabilidad', 'Scranton', 80000, 8),
+('Recursos Humanos', 'Scranton', 60000, 10),
+('Proveedores', 'Scranton', 70000, 13),
+('Servicio al Cliente', 'Scranton', 40000, 1),
+('Almacén', 'Scranton', 50000, 1),
+('Corporativo', 'Nueva York', 200000, 19);
+
+
+-- Agregamos el SELECT * FROM para ver las tablas con la informacion insertada esten correctas
+
+SELECT * FROM Empleado;
+
+SELECT * FROM Departamento;
+
